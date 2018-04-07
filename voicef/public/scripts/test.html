@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://www.hoge.com/blog/atom.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.hoge.com/blog/rss.xml" />
+</head>
+<body>
+</body>
+
+<script>
+f();
+function f(){
+	var e = document.getElementsByTagName ('link');
+	for (var i=e.length-1;i>=0;i--){
+		if((e[i].getAttribute('rel')) && (e[i].getAttribute('type')) &&
+		   (e[i].getAttribute('href')) && (e[i].getAttribute('rel').toLowerCase()=='alternate')){
+			var r=e[i].getAttribute('rel').toLowerCase();
+			var t=e[i].getAttribute('type').toLowerCase();
+			var h=e[i].getAttribute('href');
+			if ((r=='alternate')&&((t=='application/rss+xml')||(t=='application/atom+xml'))){
+				if (h.match(/^https?:\/\/.+/,'i')) {
+					alert(h);					
+					return h;
+				}else if(h.match(/^\/.+/,'i')){
+					return location.protocol+'//'+location.hostname+h;
+				}
+			}
+		}
+	}
+	return '';
+};
+</script>
